@@ -35,4 +35,31 @@ public class ContatoController : Controller
         
         return View(contato);
     }
+
+    public IActionResult Editar(int id)
+    {
+        var contato = _context.Contatos.Find(id);
+
+        if (contato is not null)
+        {
+            return View(contato);                       
+        }
+
+        return RedirectToAction(nameof(Index));
+    }
+
+    [HttpPost]
+    public IActionResult Editar(Contato contato)
+    {
+        var contatoAEditar = _context.Contatos.Find(contato.Id);
+
+        contatoAEditar.Nome = contato.Nome;
+        contatoAEditar.Telefone = contato.Telefone;
+        contatoAEditar.Ativo = contato.Ativo;
+
+        _context.Contatos.Update(contatoAEditar);
+        _context.SaveChanges();
+
+        return RedirectToAction(nameof(Index));
+    }
 }
