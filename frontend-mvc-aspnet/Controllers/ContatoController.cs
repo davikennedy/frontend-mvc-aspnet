@@ -1,4 +1,5 @@
 ﻿using frontend_mvc_aspnet.Context;
+using frontend_mvc_aspnet.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace frontend_mvc_aspnet.Controllers;
@@ -15,5 +16,10 @@ public class ContatoController : Controller
     {
         var contatos = _context.Contatos.ToList();
         return View(contatos);
+    }
+
+    public IActionResult Criar()
+    {
+        return View();
     }
 }
