@@ -74,4 +74,16 @@ public class ContatoController : Controller
 
         return RedirectToAction(nameof(Index));
     }
+
+    public IActionResult Deletar(int id)
+    {
+        var contato = _context.Contatos.Find(id);
+
+        if (contato is not null)
+        {
+            return View(contato);
+        }
+
+        return RedirectToAction(nameof(Index));
+    }
 }
