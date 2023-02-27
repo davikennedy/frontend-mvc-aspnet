@@ -22,4 +22,17 @@ public class ContatoController : Controller
     {
         return View();
     }
+
+    [HttpPost]
+    public IActionResult Criar(Contato contato)
+    {
+        if(ModelState.IsValid)
+        {
+            _context.Contatos.Add(contato);
+            _context.SaveChanges();
+            return RedirectToAction(nameof(Index));
+        }
+        
+        return View(contato);
+    }
 }
